@@ -3,22 +3,37 @@
   <body>
 
     <script>
+
+    // Text Prompts
+    var intro
+    intro = "You've awoken in a dark jungle. The sun is setting and there's little daylight left. You hear terrible sounds approaching. You look to your left, and to your right, and your eyes catch on the gleam something metal. It's a sword."
+
+    var sword_text;
+    sword_text = "A velociraptor crashes through the jungle brush. It hesitates for a moment, analyzing you as prey. It's made its decision, and rushes toward you."
+
+    var has_sword;
+    has_sword = "Instinct takes over, you bring up the sword, pointing it toward the prehistoric beast. While it may not understand exactly what it is, you seem like a larger and more dangerous threat. The velociraptor flees back into the jungle. "
+
+    var no_sword;
+    no_sword = "You are defenseless. Despite curling up into a ball, you still end up a delicious dinner for the beast."
+    // Begin Program
       alert("Dino Battle!");
+
       var user_play;
       user_play = confirm("Do you want to play?");
 
       if (user_play==true) {
         alert("Ready to play!");
-        alert("You've awoken in a dark jungle. The sun is setting and there's little daylight left. You hear terrible sounds approaching. You look to your left, and to your right, and your eyes catch on the gleam something metal. It's a sword.");
+        alert(intro);
         sword = confirm("Do you want to take the sword?");
-	alert("A velociraptor crashes through the jungle brush. It hesitates for a moment, analyzing you as prey. It's made its decision, and rushes toward you.");
-  
+	      alert(sword_text);
+
         if (sword==true) {
-          alert("Instinct takes over, you bring up the sword, pointing it toward the prehistoric beast. While it may not understand exactly what it is, you seem like a larger and more dangerous threat. The velociraptor flees back into the jungle. ");
+          alert(has_sword);
 
         }
         else {
-          alert("You are defenseless. Despite curling up into a ball, you still end up a delicious dinner for the beast.");
+          alert(no_sword);
         }
 
         alert("Game Over!");}
