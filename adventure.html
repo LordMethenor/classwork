@@ -16,31 +16,41 @@
 
     var no_sword;
     no_sword = "You are defenseless. Despite curling up into a ball, you still end up a delicious dinner for the beast."
+
+    var user_quit;
+      user_quit = false
+
     // Begin Program
       alert("Dino Battle!");
 
       var user_play;
-      user_play = confirm("Do you want to play?");
 
-      if (user_play==true) {
-        alert("Ready to play!");
-        alert(intro);
-        sword = confirm("Do you want to take the sword?");
-	      alert(sword_text);
+      while(user_quit == false) {
+        user_play = confirm("Do you want to play?");
 
-        if (sword==true) {
-          alert(has_sword);
+        if (user_play==true) {
+          alert("Ready to play!");
+          alert(intro);
+          sword = confirm("Do you want to take the sword?");
+  	      alert(sword_text);
 
-        }
+          if (sword==true) {
+            alert(has_sword);
+
+          }
+          else {
+            alert(no_sword);
+          }
+
+          alert("Game Over!");}
+
         else {
-          alert(no_sword);
+          alert("I'm sorry you don't want to play.");
         }
 
-        alert("Game Over!");}
+       user_quit = confirm("Do you want to quit?");
+    }
 
-      else {
-        alert("I am no fun!");
-      }
     </script>
 
   </body>
