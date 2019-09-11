@@ -4,7 +4,7 @@ function setup(){
 }
 
 function draw(){
-  background("#fff");
+  background("#eee");
   fill("#8c8c8c");
   strokeWeight(1);
   stroke("#000")
@@ -25,7 +25,6 @@ function draw(){
   quad(277,180, 377,180,159,292,159,242);
   stroke("#000");
   fill("#000");
-  quad(100,380,159,292,159,175,100,141);
+  quad(100,380,159,292,159,176,100,142);
   quad(100,380,377,241,377,180,159,292)
-  
 }
