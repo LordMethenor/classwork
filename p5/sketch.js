@@ -1,20 +1,19 @@
 var lastpontX
 var lastpointY;
 function setup(){
-  createCanvas(600, 400);
-  starting = true
+  createCanvas(600, 400); 
 }
 function draw(){
-  strokeWeight(1)
-  newpointX = mouseX;
-  newpointY = mouseY;
-  if(starting == true){
-    lastpointX = newpointX;
-    lastpointY = newpointY;
-    starting = false;
-  }
-  line(lastpointX, lastpointY, newpointX, newpointY);
-  lastpointX = newpointX;
-  lastpointY = newpointY;
+  background("#777")
+  noStroke();
 
+  if(mouseX <= 300 && mouseY<= 200){
+    fill("#f00f");
+    rect(0,0,300,400);
+  }
+
+  if(mouseX >= 300 && mouseY>=300){
+    fill("#00ff");
+    rect(300,0,300,400);
+  }
 }
