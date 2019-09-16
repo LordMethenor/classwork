@@ -1,3 +1,4 @@
+//if loop, multiple conditions (&&), variables, and interactivity
 var lastpontX
 var lastpointY;
 function setup(){
