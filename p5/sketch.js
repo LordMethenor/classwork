@@ -1,27 +1,46 @@
-
-var square1;
-
+//if loop, multiple conditions (&&), variables, and interactivity
+var lastpontX;
+var lastpointY;
+var xList;
+  xList = [];
+var yList;
+  yList = [];
+var timeList;
+  timeList = [];
 function setup(){
   createCanvas(600, 400);
-
+  starting = true;
 }
-
 function draw(){
-  background("#777");
-
-  if (mouseX>=100 && mouseX<=300 && mouseY>=100 && mouseY <=300) {
-    square1 = 0;
+  strokeWeight(5);
+  print("passed1");
+  xList[xList.length] = mouseX;
+  yList[yList.length] = mouseY;
+  timeList[timeList.length] = new Date();
+  var i;
+  endTime = new Date();
+  print("passed2");
+  for (var i = 0; i < xList.length; i++) {
+    if (mouseX==xList[i] && mouseY==yList[i]) {
+      var timeDiff = endTime - timeList[i];
+      timeDiff /= 1000;
+      if (timeDiff >= 500) {
+        var restartText;
+        restartText = "The game is over. Your score is  "xList.length".";
+        alert(restartText);
+        noLoop();
+      }
+    }
   }
 
-  if (square1==0) {
-    rect(75,75,50,50);
-    rect(275,75,50,50);
-    rect(75,275,50,50);
-    rect(275,275,50,50);
-  }else {
-    rect(100,100,200,200);
+  newpointX = mouseX;
+  newpointY = mouseY;
+  if(starting == true){
+    lastpointX = newpointX;
+    lastpointY = newpointY;
+    starting = false;
   }
-
-
-
+  line(lastpointX, lastpointY, newpointX, newpointY);
+  lastpointX = newpointX;
+  lastpointY = newpointY;
 }
