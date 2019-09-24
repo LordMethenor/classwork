@@ -1,19 +1,27 @@
-var lastpontX
-var lastpointY;
+
+var square1;
+
 function setup(){
-  createCanvas(600, 400); 
+  createCanvas(600, 400);
+
 }
+
 function draw(){
-  background("#777")
-  noStroke();
+  background("#777");
 
-  if(mouseX <= 300 && mouseY<= 200){
-    fill("#f00f");
-    rect(0,0,300,400);
+  if (mouseX>=100 && mouseX<=300 && mouseY>=100 && mouseY <=300) {
+    square1 = 0;
   }
 
-  if(mouseX >= 300 && mouseY>=300){
-    fill("#00ff");
-    rect(300,0,300,400);
+  if (square1==0) {
+    rect(75,75,50,50);
+    rect(275,75,50,50);
+    rect(75,275,50,50);
+    rect(275,275,50,50);
+  }else {
+    rect(100,100,200,200);
   }
+
+
+
 }
