@@ -1,37 +1,27 @@
 //if loop, multiple conditions (&&), variables, and interactivity
-var lastpontX;
-var lastpointY;
-var xList;
-  xList = [];
-var yList;
-  yList = [];
-var timeList;
-  timeList = [];
+xList = []
+oldPixels = []
+timePixels = []
+
 function setup(){
-  createCanvas(600, 400);
+  createCanvas(400, 400);
   starting = true;
+  frameRate(100);
+  background('#fff')
+  loadPixels();
+  for (var i = 0; i < pixels.length; i = i + 4) {
+    timePixels[i] = 0;
+  }
 }
 function draw(){
   strokeWeight(5);
-  print("passed1");
-  xList[xList.length] = mouseX;
-  yList[yList.length] = mouseY;
-  timeList[timeList.length] = new Date();
-  var i;
-  endTime = new Date();
-  print("passed2");
-  for (var i = 0; i < xList.length; i++) {
-    if (mouseX==xList[i] && mouseY==yList[i]) {
-      var timeDiff = endTime - timeList[i];
-      timeDiff /= 1000;
-      if (timeDiff >= 500) {
-        var restartText;
-        restartText = "The game is over. Your score is  "xList.length".";
-        alert(restartText);
-        noLoop();
-      }
-    }
+  stroke('rgba(10,10,10,.5)');
+  loadPixels();
+  for (var i = 0; i < pixels.length; i = i + 4) {
+    oldPixels[i] = pixels[i];
   }
+  var i;
+  xList[xList.length] = mouseX;
 
   newpointX = mouseX;
   newpointY = mouseY;
@@ -43,4 +33,29 @@ function draw(){
   line(lastpointX, lastpointY, newpointX, newpointY);
   lastpointX = newpointX;
   lastpointY = newpointY;
+
+  loadPixels();
+  for (var i = 0; i < pixels.length; i = i + 4) {
+    if (pixels[i] !== oldPixels[i]) {
+      if (timePixels[i] == 0) {
+        timePixels[i] = new Date();
+      }else{
+        var endTime = new Date();
+        print(endTime);
+        print(timePixels[i]);
+        var timeDiff = endTime - timePixels[i];
+        timeDiff /= 1000;
+        print(timeDiff);
+        if (timeDiff >= .5) {
+          var score;
+          score = xList.length;
+          var restartText;
+          restartText = "The game is over. Your score is " + score + ".";
+          alert(restartText);
+          noLoop()
+          i = i + pixels.length;
+        }
+      }
+    }
+  }
 }
