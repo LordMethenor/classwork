@@ -3,8 +3,8 @@ xList = []
 oldPixels = []
 timePixels = []
 over = false
-var start;
-var cursor;
+var start1;
+var cursor1;
 var starting1;
 var starting2;
 function setup(){
@@ -17,9 +17,8 @@ function setup(){
     timePixels[i] = 0;
   }
   strokeCap(SQUARE);
-  cursor = loadImage("images/cursor");
-  start = loadImage("images/start");
-  background(start);
+  cursor1 = loadImage("images/cursor.gif");
+  start1 = loadImage("images/start.png");
 }
 function draw(){
   if(over == true){
@@ -40,36 +39,40 @@ function draw(){
     newpointX = mouseX;
     newpointY = mouseY;
     if(starting1 == true){
-      image(cursor, mouseX, mouseY);
+      image(start1, 0, 0);
+      image(cursor1, mouseX-30, mouseY-30);
     }else if (starting2 == true) {
       lastpointX = newpointX;
       lastpointY = newpointY;
       starting2 = false;
-    }
-
-    line(lastpointX, lastpointY, newpointX, newpointY);
-    lastpointX = newpointX;
-    lastpointY = newpointY;
-
-    loadPixels();
-    for (var i = 0; i < pixels.length; i = i + 4) {
-      if (pixels[i] !== oldPixels[i]) {
-        if (timePixels[i] == 0) {
-          timePixels[i] = new Date();
-        }else{
-          var endTime = new Date();
-          print(endTime);
-          print(timePixels[i]);
-          var timeDiff = endTime - timePixels[i];
-          timeDiff /= 1000;
-          print(timeDiff);
-          if (timeDiff >= .5) {
-            over = true;
-            i = i + pixels.length;
+    }else {
+      loadPixels();
+      for (var i = 0; i < pixels.length; i = i + 4) {
+        if (pixels[i] !== oldPixels[i]) {
+          if (timePixels[i] == 0) {
+            timePixels[i] = new Date();
+          }else{
+            var endTime = new Date();
+            print(endTime);
+            print(timePixels[i]);
+            var timeDiff = endTime - timePixels[i];
+            timeDiff /= 1000;
+            print(timeDiff);
+            if (timeDiff >= .5) {
+              over = true;
+              i = i + pixels.length;
+            }
           }
         }
       }
+      line(lastpointX, lastpointY, newpointX, newpointY);
+      lastpointX = newpointX;
+      lastpointY = newpointY;
     }
+
+
+
+
   }
 
 }
