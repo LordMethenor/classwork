@@ -3,15 +3,23 @@ xList = []
 oldPixels = []
 timePixels = []
 over = false
+var start;
+var cursor;
+var starting1;
+var starting2;
 function setup(){
   createCanvas(400, 400);
-  starting = true;
+  starting1 = true;
   frameRate(100);
   background('#fff')
   loadPixels();
   for (var i = 0; i < pixels.length; i = i + 4) {
     timePixels[i] = 0;
   }
+  strokeCap(SQUARE);
+  cursor = loadImage("images/cursor");
+  start = loadImage("images/start");
+  background(start);
 }
 function draw(){
   if(over == true){
@@ -28,18 +36,21 @@ function draw(){
     }
     var i;
     xList[xList.length] = mouseX;
-  
+
     newpointX = mouseX;
     newpointY = mouseY;
-    if(starting == true){
+    if(starting1 == true){
+      image(cursor, mouseX, mouseY);
+    }else if (starting2 == true) {
       lastpointX = newpointX;
       lastpointY = newpointY;
       starting = false;
     }
+
     line(lastpointX, lastpointY, newpointX, newpointY);
     lastpointX = newpointX;
     lastpointY = newpointY;
-  
+
     loadPixels();
     for (var i = 0; i < pixels.length; i = i + 4) {
       if (pixels[i] !== oldPixels[i]) {
@@ -60,5 +71,5 @@ function draw(){
       }
     }
   }
-    
+
 }
