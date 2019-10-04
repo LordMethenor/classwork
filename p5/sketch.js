@@ -44,7 +44,7 @@ function draw(){
     }else if (starting2 == true) {
       lastpointX = newpointX;
       lastpointY = newpointY;
-      starting = false;
+      starting2 = false;
     }
 
     line(lastpointX, lastpointY, newpointX, newpointY);
