@@ -1,8 +1,8 @@
 function read(input){
+  this.list = input
   this.ans = []
-  this.list = input.split("");
   this.ops = ["+","-","*","/","^","(",")"]
-  this.nums = ["1","2","3","4","5","6","7","8","9",'_','.']
+  this.nums = ["0","1","2","3","4","5","6","7","8","9",'_','.']
   this.both = [].concat(this.ops,this.nums)
   for (var i = 0; i < this.list.length; i++) {
     verified = false
@@ -12,7 +12,7 @@ function read(input){
         break;
       }
     }
-    if (verified = false){
+    if (verified === false) {
       this.list.splice(i,1);
       i = i-1
     }
@@ -20,7 +20,7 @@ function read(input){
     if (this.list[i] == '(') {
       this.parenthesis = [];
       this.temp = this.list;
-      this.ans[this.ans.length] = new initialize(this.list.splice(i+1,this.list.length-1));
+      this.ans[this.ans.length] = new initialize(this.list.splice(i+1,this.list.length-1-i));
       this.list.length = i;
       this.retval = this.ans[this.ans.length-1].retlist();
       this.list = [].concat(this.list, this.retval);
@@ -36,7 +36,7 @@ function read(input){
     }
   }for (var i = 0; i < this.list.length; i++) {
     if (this.list[i] == '^') {
-      this.ans[this.ans.length] = new math(this.list, i, '^',this.nums)
+      this.ans[this.ans.length] = new math(this.list, i, this.list[i],this.nums)
       this.list = this.ans[this.ans.length-1].repval();
       i = this.ans[this.ans.length-1].reti();
     }
@@ -54,7 +54,7 @@ function read(input){
     }
   }
   this.retval = function()  {
-    return this.list
+    return this.list;
   }
 
 }
@@ -103,7 +103,7 @@ function math(list, i, op, nums){
   this.val1 = parseFloat(this.num1.join(""));
   this.val2 = parseFloat(this.num2.join(""));
   if (this.op == '^') {
-    this.temp = this.val1 ^ this.val2
+    this.temp = this.val1 ** this.val2
   }else if  (this.op == '*')  {
     this.temp = this.val1 * this.val2
   }else if  (this.op == '/')  {
@@ -113,9 +113,12 @@ function math(list, i, op, nums){
   }else if  (this.op == '-')  {
     this.temp = this.val1 - this.val2
   }
-  
+
   this.ans = this.temp.toString().split("");
-  this.list.splice(this.i,1+this.num1.length+this.num2.length,this.ans);
+  this.list.splice(this.i,1+this.num1.length+this.num2.length);
+  this.temp = this.list.splice(0,this.i)
+  this.temp = [].concat(this.temp,this.ans);
+  this.list = [].concat(this.temp,this.list)
   this.retval = function()  {
     return this.ans;
   }
@@ -123,7 +126,7 @@ function math(list, i, op, nums){
     return this.list;
   }
   this.reti = function()  {
-    return this.i + this.ans.length;
+    return this.i;
   }
 }
 function initialize(input){
@@ -131,7 +134,6 @@ function initialize(input){
   this.read = new read(this.input);
   this.list = this.read.retval();
   this.answer = this.list.join("");
-  alert(this.answer)
   this.retval = function()  {
     return this.answer;
   }
@@ -139,9 +141,6 @@ function initialize(input){
     return this.list;
   }
 }
-function joinlist(list){
-  list
-}
-input = prompt("Enter your expression: ");
+input = prompt("Enter your expression: ").split("");
 master = new initialize(input);
 alert("Answer: "+master.retval());
