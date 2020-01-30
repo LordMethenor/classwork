@@ -20,9 +20,21 @@ function read(input){
     if (this.list[i] == '(') {
       this.parenthesis = [];
       this.temp = this.list;
-      this.ans[this.ans.length] = new initialize(this.list.splice(i+1,this.list.length-1-i));
-      this.list.length = i;
+      opened = 1
+      closed = 0
+      t = i
+      while (opened-closed > 0) {
+        t++
+        if (this.list[t] == ')') {
+          closed++
+        }else if (this.list[t] == '(') {
+          opened++
+        }
+      }
+      this.ans[this.ans.length] = new initialize(this.list.splice(i+1,(t-i)-1));
+      this.list.splice(i,1)
       this.retval = this.ans[this.ans.length-1].retlist();
+      this.list = insert(this.list,this.retval,i)
       this.list = [].concat(this.list, this.retval);
 
     }else if (this.list[i] == ')')  {
@@ -116,9 +128,7 @@ function math(list, i, op, nums){
 
   this.ans = this.temp.toString().split("");
   this.list.splice(this.i,1+this.num1.length+this.num2.length);
-  this.temp = this.list.splice(0,this.i)
-  this.temp = [].concat(this.temp,this.ans);
-  this.list = [].concat(this.temp,this.list)
+  this.list = insert(this.list, this.ans, this.i)
   this.retval = function()  {
     return this.ans;
   }
@@ -140,6 +150,11 @@ function initialize(input){
   this.retlist = function() {
     return this.list;
   }
+}
+function insert(base,insert,pos)  {
+  temp = base.splice(0,pos)
+  temp = [].concat(temp,insert);
+  return [].concat(temp,base)
 }
 input = prompt("Enter your expression: ").split("");
 master = new initialize(input);
