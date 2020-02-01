@@ -21,7 +21,8 @@ function read(input){
               }
             }
           }if (nverify == false) {
-            this.list[i] = '_'
+            this.list.splice(i,1)
+            this.list = insert(this.list, ['_','1','*'],i)
           }
         }
         //fix if - comes after number
