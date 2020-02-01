@@ -1,15 +1,30 @@
 function read(input){
   this.list = input
   this.ans = []
-  this.ops = ["+","-","*","/","^","(",")"]
-  this.nums = ["0","1","2","3","4","5","6","7","8","9",'_','.']
+  this.ops = ["+","*","/","^","(",")",'-']
+  this.nums = ["0","1","2","3","4","5","6","7","8","9",'.','_']
   this.both = [].concat(this.ops,this.nums)
   for (var i = 0; i < this.list.length; i++) {
     verified = false
     for (var j = 0; j < this.both.length; j++) {
       if (this.list[i] == this.both[j]) {
         verified = true;
-        break;
+        if (this.list[i] == '0') {
+        }
+        if (this.list[i] == '-') {
+          nverify = false
+          if (i == 0) {
+          }else{
+            for (var i2 = 0; i2 < this.nums.length; i2++) {
+              if (this.list[i-1] == this.nums[i2]) {
+                nverify = true;
+              }
+            }
+          }if (nverify == false) {
+            this.list[i] = '_'
+          }
+        }
+        //fix if - comes after number
       }
     }
     if (verified === false) {
@@ -20,31 +35,21 @@ function read(input){
     if (this.list[i] == '(') {
       this.parenthesis = [];
       this.temp = this.list;
-      opened = 1
-      closed = 0
+      var a = 1
+      var b = 0
       t = i
-      while (opened-closed > 0) {
+      while (a-b > 0) {
         t++
         if (this.list[t] == ')') {
-          closed++
+          b++
         }else if (this.list[t] == '(') {
-          opened++
+          a++
         }
       }
       this.ans[this.ans.length] = new initialize(this.list.splice(i+1,(t-i)-1));
-      this.list.splice(i,1)
+      this.list.splice(i,2)
       this.retval = this.ans[this.ans.length-1].retlist();
       this.list = insert(this.list,this.retval,i)
-      this.list = [].concat(this.list, this.retval);
-
-    }else if (this.list[i] == ')')  {
-      this.parenthesis = [];
-      this.ans[this.ans.length] = new initialize(this.list.splice(0,this.list[i]))
-      this.list.splice(0,1)
-      this.retval = this.ans[this.ans.length-1].retlist();
-      this.contval = this.retval.length-1
-      this.list = [].concat(this.retval, this.list);
-      i = this.contval
     }
   }for (var i = 0; i < this.list.length; i++) {
     if (this.list[i] == '^') {
@@ -88,7 +93,6 @@ function math(list, i, op, nums){
       for (var s = 0; s < this.nums.length; s++) {
         if (this.list[r] == this.nums[s]) {
           cont = true;
-          break;
         }
       }
     }
@@ -107,10 +111,15 @@ function math(list, i, op, nums){
       for (var s = 0; s < this.nums.length; s++) {
         if (this.list[r] == this.nums[s]) {
           cont = true;
-          break;
         }
       }
     }
+  }
+  if (this.num1[0] == '_') {
+    this.num1[0] = '-'
+  }
+  if (this.num2[0] == '_') {
+    this.num2[0] = '-'
   }
   this.val1 = parseFloat(this.num1.join(""));
   this.val2 = parseFloat(this.num2.join(""));
@@ -127,6 +136,7 @@ function math(list, i, op, nums){
   }
 
   this.ans = this.temp.toString().split("");
+  this.ans = ntchk(this.ans, 1)
   this.list.splice(this.i,1+this.num1.length+this.num2.length);
   this.list = insert(this.list, this.ans, this.i)
   this.retval = function()  {
@@ -143,13 +153,22 @@ function initialize(input){
   this.input = input;
   this.read = new read(this.input);
   this.list = this.read.retval();
-  this.answer = this.list.join("");
   this.retval = function()  {
+    this.answer = ntchk(this.list,0);
+    this.answer = this.list.join("");
     return this.answer;
   }
   this.retlist = function() {
     return this.list;
   }
+}
+function ntchk(list,dir){
+  if (list[0] == '_' && dir == 0) {
+    list[0] = '-'
+  }else if (list[0] == '-' && dir == 1) {
+    list[0] = '_'
+  }
+  return list
 }
 function insert(base,insert,pos)  {
   temp = base.splice(0,pos)
