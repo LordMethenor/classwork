@@ -59,12 +59,14 @@ function read(input){
       i = this.ans[this.ans.length-1].reti();
     }
   }for (var i = 0; i < this.list.length; i++) {
+
     if (this.list[i] == '*' | this.list[i] == '/') {
       this.ans[this.ans.length] = new math(this.list, i, this.list[i],this.nums)
       this.list = this.ans[this.ans.length-1].repval();
       i = this.ans[this.ans.length-1].reti();
     }
   }for (var i = 0; i < this.list.length; i++) {
+
     if (this.list[i] == '+' | this.list[i] == '-') {
       this.ans[this.ans.length] = new math(this.list, i, this.list[i],this.nums)
       this.list = this.ans[this.ans.length-1].repval();
@@ -116,14 +118,8 @@ function math(list, i, op, nums){
       }
     }
   }
-  if (this.num1[0] == '_') {
-    this.num1[0] = '-'
-  }
-  if (this.num2[0] == '_') {
-    this.num2[0] = '-'
-  }
-  this.val1 = parseFloat(this.num1.join(""));
-  this.val2 = parseFloat(this.num2.join(""));
+  this.val1 = parseFloat(ntchk(this.num1,0).join(""));
+  this.val2 = parseFloat(ntchk(this.num2,0).join(""));
   if (this.op == '^') {
     this.temp = this.val1 ** this.val2
   }else if  (this.op == '*')  {
@@ -135,8 +131,13 @@ function math(list, i, op, nums){
   }else if  (this.op == '-')  {
     this.temp = this.val1 - this.val2
   }
-
   this.ans = this.temp.toString().split("");
+  for (var k = 0; k < this.ans.length; k++) {
+    if (this.ans[k] == 'e') {
+      throw "failure: out of range"
+      break
+    }
+  }
   this.ans = ntchk(this.ans, 1)
   this.list.splice(this.i,1+this.num1.length+this.num2.length);
   this.list = insert(this.list, this.ans, this.i)
@@ -155,8 +156,8 @@ function initialize(input){
   this.read = new read(this.input);
   this.list = this.read.retval();
   this.retval = function()  {
-    this.answer = ntchk(this.list,0);
-    this.answer = this.list.join("");
+    this.list = ntchk(this.list,0);
+    this.answer = parseFloat(parseFloat(this.list.join("")).toFixed(10).toString());
     return this.answer;
   }
   this.retlist = function() {
@@ -164,6 +165,8 @@ function initialize(input){
   }
 }
 function ntchk(list,dir){
+  dir = dir;
+  list = list
   if (list[0] == '_' && dir == 0) {
     list[0] = '-'
   }else if (list[0] == '-' && dir == 1) {
@@ -171,11 +174,15 @@ function ntchk(list,dir){
   }
   return list
 }
-function insert(base,insert,pos)  {
+function insert(base,ins,pos)  {
+  base = base
+  insert = ins
+  pos = pos
   temp = base.splice(0,pos)
   temp = [].concat(temp,insert);
   return [].concat(temp,base)
 }
+
 input = prompt("Enter your expression: ").split("");
 master = new initialize(input);
 alert("Answer: "+master.retval());
