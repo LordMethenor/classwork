@@ -1,3 +1,4 @@
+//changes made for starting arrays: splice already used, but introduced array push method and array unshift method
 function Read (input) {
   this.list = input;
   this.ans = [];
@@ -42,7 +43,7 @@ function Read (input) {
         }
       }
 
-      this.ans[this.ans.length] = new Initialize(this.list.splice(i + 1, (t - i) - 1));
+      this.ans.push(new Initialize(this.list.splice(i + 1, (t - i) - 1)));
       this.list.splice(i, 2);
       this.retval = this.ans[this.ans.length - 1].retlist();
       this.list = Insert(this.list, this.retval, i);
@@ -50,19 +51,19 @@ function Read (input) {
   }
   for (i = 0; i < this.list.length; i++) {
     if (this.list[i] === '^') {
-      this.ans[this.ans.length] = new Operation(this.list, i, this.list[i], this.nums);
+      this.ans.push(new Operation(this.list, i, this.list[i], this.nums));
       this.list = this.ans[this.ans.length - 1].repval();
       i = this.ans[this.ans.length - 1].reti();
     }
   } for (i = 0; i < this.list.length; i++) {
     if (this.list[i] === '*' | this.list[i] === '/') {
-      this.ans[this.ans.length] = new Operation(this.list, i, this.list[i], this.nums);
+      this.ans.push(new Operation(this.list, i, this.list[i], this.nums));
       this.list = this.ans[this.ans.length - 1].repval();
       i = this.ans[this.ans.length - 1].reti();
     }
   } for (i = 0; i < this.list.length; i++) {
     if (this.list[i] === '+' | this.list[i] === '-') {
-      this.ans[this.ans.length] = new Operation(this.list, i, this.list[i], this.nums);
+      this.ans.push(new Operation(this.list, i, this.list[i], this.nums));
       this.list = this.ans[this.ans.length - 1].repval();
       i = this.ans[this.ans.length - 1].reti();
     }
@@ -83,7 +84,7 @@ function Operation (list, i, op, nums) {
   var r = i - 1;
   while (cont === true) {
     cont = false;
-    this.num1[this.num1.length] = this.list[r];
+    this.num1.unshift(this.list[r]);
     r = r - 1;
     if (r === -1) {
       cont = false;
@@ -95,13 +96,12 @@ function Operation (list, i, op, nums) {
       }
     }
   }
-  this.num1 = this.num1.reverse();
   this.i = i - this.num1.length;
   cont = true;
   r = i + 1;
   while (cont === true) {
     cont = false;
-    this.num2[this.num2.length] = this.list[r];
+    this.num2.push(this.list[r]);
     r = r + 1;
     if (r === this.list.length) {
       cont = false;
