@@ -1,0 +1,46 @@
+queue = new Array()
+qlen = 0
+running = 1
+loop while running = 1
+  command = input("Enter your command.")
+  confirm = 0
+  if command = 'stop' then
+    confirm = 1
+    running = 0
+  end if
+  if command = 'enqueue' then
+    confirm = 1
+    enqueue = input("Enter your value.")
+    queue[qlen] = enqueue
+    qlen = qlen + 1
+    alert("Value "+enqueue+" added to the queue. The length is now "+qlen+".")
+  end if
+  if command = 'count' then
+    confirm = 1
+    alert("The queue currently has "+ qlen +" entries.")
+  end if
+  if qlen > 0 then
+    if command = 'dequeue' then
+      confirm = 1
+      dequeue = queue[0]
+      loop B from 1 to qlen
+        queue[B-1] = queue[B]
+      end loop
+      qlen = qlen - 1
+      alert("Value "+dequeue+" removed from the queue. The length is now "+qlen+".")
+    end if
+    if command = 'peek' then
+      confirm = 1
+      peek = queue[0]
+      alert("The next value in the queue is "+peek+".")
+    end if
+  end if
+  if confirm = 0 then
+    if qlen < 1 then
+        alert("Command "+ command + " is invalid. There are no entries in the queue. Please use enqueue, stop, or count.")
+    end if
+    if qlen > 0 then
+      alert("Command "+ command + " is invalid. Please use enqueue, dequeue, stop, count, or peek.")
+    end if
+  end if
+end loop

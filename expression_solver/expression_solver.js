@@ -1,4 +1,5 @@
 // changes made for starting arrays: splice already used, but introduced array push method and array unshift method
+//changes made for Arrays are objects: see above
 function Read (input) {
   this.list = input;
   this.ans = [];
