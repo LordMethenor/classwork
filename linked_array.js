@@ -21,7 +21,7 @@ function Linked_Array()  {
   this.getPos = function(loc) {
     x = -1;
     posList = []
-    for (i = 0, i < loc+1, i++) {
+    for (i = 0; i < loc+1; i++) {
       b = 0;
       while (this.order[b] != x) {
         b++;
@@ -33,7 +33,7 @@ function Linked_Array()  {
   }
   this.unlink = function(){
     return(this.getPos(length(this.array))[1]);
-    
+
   };
 //  this.getArray;
 //  this.subArray;
