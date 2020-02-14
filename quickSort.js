@@ -1,4 +1,5 @@
 function Piece (array) {
+  console.log(array);
   this.array = array;
   this.partition = this.array.pop();
   this.part1 = [];
@@ -32,4 +33,4 @@ function quickSort (array) {
   master = new Piece(arr);
   return master.retPiece();
 }
-//quickSort(array);
+//quickSort(array), output in console;
