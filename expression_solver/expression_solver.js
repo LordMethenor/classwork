@@ -117,7 +117,7 @@ function Operation (list, i, op, nums) {
   this.val1 = parseFloat(Ntchk(this.num1, 0).join(''));
   this.val2 = parseFloat(Ntchk(this.num2, 0).join(''));
   if (this.op === '^') {
-    this.temp = this.val1 ** this.val2;
+    this.temp = Math.pow(this.val1, this.val2);
   } else if (this.op === '*') {
     this.temp = this.val1 * this.val2;
   } else if (this.op === '/') {
