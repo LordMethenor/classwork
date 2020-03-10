@@ -1,0 +1,23 @@
+Welcome, Example Exampleson!
+
+PRESIDENT OF AMERICA
+[] Joe Mama (L)
+[] Donald Trump (R)
+[] Hillary Clinton (D)
+[] Write-in [____________]
+
+EMPEROR OF THE GALAXY
+[] Darth Sidious (D)
+[] Satan (R)
+[] Mohatma Gandhi (I)
+[] Write-in [____________]
+
+MINISTER OF MAGIC
+[] Hairy Otter (R)
+[] Perry the Platypus (D)
+[] Write-in [____________]
+
+SUPREME LEADER
+[] Kim Jong Snoke (I)
+[] Dumbledore Putin (R)
+[] Write-in [____________]
