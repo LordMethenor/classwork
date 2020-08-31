@@ -73,7 +73,7 @@ function Race (name) {
         return;
       }
     }
-    for (var i = 0; i < this.writeins; i++) {
+    for (var i = 0; i < this.writeins.length; i++) {
       if (this.writeins[i][0] == name) {
         this.wVote(i);
         return;
