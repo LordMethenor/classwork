@@ -43,9 +43,31 @@ function Schedule (name) {
     }
 }
 function test () {
+    var notify;
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+        notify = false;
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            notify = true;
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function(p) {
+               if(p === 'granted') {
+                   // show notification here
+               } else {
+                   console.log('User blocked notifications.');
+                   notify = false;
+               }
+            }).catch(function(err) {
+                console.error(err);
+            });
+        }
+    }
     school = new Schedule ('A day');
     meetings = [];
-    test = new Meeting ('Test','https://www.google.com','password');
+    test = new Meeting ('Spanish','https://us04web.zoom.us/j/5160025555?pwd=SEJJZmpGbkNaSG9meWIBK1dpTTZYZz09','038832');
     clock = new Date();
     school.addMeeting(test, clock.getHours()*60 + clock.getMinutes() + 1);
     first = new Meeting('English','https://zoom.us/j/99755115418','Phillips');
@@ -62,7 +84,8 @@ function test () {
         currentMeeting = school.findMeeting(time);
         if (currentMeeting != null) {
             if (currentMeeting.password != null) {
-                alert(currentMeeting.password);
+                var notify = new Notification(password);
+                document.write(currentMeeting.password);
             }
             window.open(currentMeeting.link);
         }
