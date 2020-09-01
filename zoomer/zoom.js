@@ -68,8 +68,7 @@ function test () {
     school = new Schedule ('A day');
     meetings = [];
     test = new Meeting ('Spanish','https://us04web.zoom.us/j/5160025555?pwd=SEJJZmpGbkNaSG9meWIBK1dpTTZYZz09','038832');
-    clock = new Date();
-    school.addMeeting(test, clock.getHours()*60 + clock.getMinutes() + 1);
+    school.addMeeting(test, 16*60+29);
     first = new Meeting('English','https://zoom.us/j/99755115418','Phillips');
     second = new Meeting('HOTA', 'https://zoom.us/j/92715886178', '469939');
     third = new Meeting('CS', 'https://zoom.us/j/4224978034?pwd=SVZpZFczdERoK08rWUFhb3o1SHMyQT09', '');
