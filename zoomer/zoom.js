@@ -84,7 +84,7 @@ function test () {
         currentMeeting = school.findMeeting(time);
         if (currentMeeting != null) {
             if (currentMeeting.password != null) {
-                var notify = new Notification(password);
+                var notify = new Notification(currentMeeting.password);
                 document.write(currentMeeting.password);
             }
             window.open(currentMeeting.link);
