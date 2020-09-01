@@ -46,7 +46,8 @@ function test () {
     school = new Schedule ('A day');
     meetings = [];
     test = new Meeting ('Test','https://www.google.com','password');
-    school.addMeeting(test, 15*60+28);
+    clock = new Date();
+    school.addMeeting(test, clock.getHours()*60 + clock.getMinutes() + 1);
     first = new Meeting('English','https://zoom.us/j/99755115418','Phillips');
     second = new Meeting('HOTA', 'https://zoom.us/j/92715886178', '469939');
     third = new Meeting('CS', 'https://zoom.us/j/4224978034?pwd=SVZpZFczdERoK08rWUFhb3o1SHMyQT09', '');
@@ -55,15 +56,6 @@ function test () {
     school.addMeeting(second, 9*60+30);
     school.addMeeting(third, 11*60);
     school.addMeeting(fourth, 13*60+15);
-    clock = new Date();
-    time = clock.getHours()*60 + clock.getMinutes();
-    currentMeeting = school.findMeeting(time);
-    if (currentMeeting != null) {
-        if (currentMeeting.password != null) {
-            alert(currentMeeting.password);
-        }
-        window.open(currentMeeting.link);
-    }
     check = setInterval(() => {
         clock = new Date();
         time = clock.getHours()*60 + clock.getMinutes();
