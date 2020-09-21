@@ -7,15 +7,15 @@
     <?php
       include 'et.php';
       $myglasses = new Sunglasses;
-      $myglasses->owner = "Lee";
-      $myglasses->brand = "Yaybans";
-      $myglasses->material = "plastic";
-      $myglasses->lenscorrection = "nearsighted";
-      $myglasses->shade = "darker";
+      $myglasses->setOwner("Lee");
+      $myglasses->setBrand("Yaybans");
+      $myglasses->setMaterial("plastic");
+      $myglasses->setLens("nearsighted");
+      $myglasses->setShade("darker");
       echo $myglasses->describe();
       $image = 'A tree';
       echo "<br>Before: <b>" . $image . "</b>";
-      $correctedImage = $myglasses->correct('A tree');
+      $correctedImage = $myglasses->correct($image);
       echo "<br>After: <b>" . $correctedImage . "</b>";
       
     ?> 
