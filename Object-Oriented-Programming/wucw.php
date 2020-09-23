@@ -21,6 +21,18 @@
     public function setMaterial ($material) {
       $this->material = $material;
     }
+    public function getOwner () {
+      return $this->owner;
+    }
+    public function getBrand () {
+      return $this->brand;
+    }
+    public function getLens () {
+      return $this->lenscorrection;
+    }
+    public function getMaterial () {
+      return $this->material;
+    }
     public function describe() {
       return "Owner: " . $this->owner . "<br>Brand: " . $this->brand . "<br>Lens Correction: " . $this->lenscorrection . "<br>Material: " . $this->material; 
     }
@@ -32,6 +44,9 @@
     protected $shade;
     public function setShade ($shade) {
       $this->shade = $shade;
+    }
+    public function getShade () {
+      return $this->shade;
     }
     public function describe () {
       return parent::describe() . "<br>Tint: " . $this->shade;
