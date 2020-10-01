@@ -1,12 +1,12 @@
 <html>
   <head>
-    <title>Object Oriented Programming</title>
+    <title>Associative Array vs OOP</title>
   </head>
   <body>
-  <h1>Even More OOP</h1>
-  <h2>WU: Modifying Modifiers with Getters & Setters and CW: OOP & Inheritance</h2>
+  <h1>OOP and/or Associative Arrays</h1>
+  <h2>OOP</h2>
     <?php
-      include 'wucw.php';
+      include 'oop.php';
       $myglasses = new Sunglasses;
       $myglasses->setOwner("Lee");
       $myglasses->setBrand("Yaybans");
@@ -19,5 +19,18 @@
       $correctedImage = $myglasses->correct($image);
       echo "<br>After: <b>" . $correctedImage . "</b>";
     ?> 
+    <h2>Associative Array</h2>
+    <?php
+      $myglasses = [
+        'Owner'=>'Lee',
+        'Brand'=>'Yaybeans',
+        'Lens Correction'=>'nearsighted',
+        'Material'=>'pastic',
+        'Tint'=>'darker'
+      ];
+      foreach ($myglasses as $property => $value) {
+        echo $property . ": " . $value ."<br>";
+      }
+    ?>
   </body>
 </html>
